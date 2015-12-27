@@ -94,8 +94,8 @@ int node_delete_last(Node **node) {
     Node *last = NULL;
 
     /* not a node i know */
-    if(node == NULL) {
-        return 0;
+    if(!node || !(*node)) {
+        return -1;
     }
 
     /* there's only one node, alone.. */

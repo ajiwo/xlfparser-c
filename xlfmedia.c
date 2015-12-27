@@ -20,6 +20,10 @@ int media_delete_last(Node **node) {
     Node *last;
     Media *media;
 
+    if(!node || !(*node)) {
+        return -1;
+    }
+
     last = (*node)->last;
     media = last->data;
 

@@ -52,6 +52,10 @@ int keyval_delete_last(Node **node) {
     Node *last;
     KeyVal *keyval;
 
+    if(!node || !(*node)) {
+        return -1;
+    }
+
     last = (*node)->last;
     keyval = last->data;
 
