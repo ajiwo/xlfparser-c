@@ -2,6 +2,8 @@
 #define XLFNODE_H
 
 #include <stdlib.h>
+#include <string.h>
+
 #include "xlfparser-data.h"
 
 /**
@@ -12,7 +14,7 @@ Node *node_new();
 
 /**
  * @brief append an initialized child node to the end of nodes.
- * @param parent the existing node with at least contains one node
+ * @param parent the existing node which at least contains one node
  * @param child node to be appended, created by node_new()
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see node_new()
