@@ -1,5 +1,7 @@
 #ifndef XLFNODE_H
 #define XLFNODE_H
+
+#include <stdlib.h>
 #include "xlfparser-data.h"
 
 Node *node_new();
