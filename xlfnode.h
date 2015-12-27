@@ -1,5 +1,5 @@
-#ifndef XLFPARSER
-#define XLFPARSER
+#ifndef XLFNODE_H
+#define XLFNODE_H
 #include "xlfparser-data.h"
 
 Node *node_new();
@@ -36,5 +36,5 @@ void node_add_keyval(Node **keyval_node, char *key, char *value);
 void _regunreg_node(Node *node, int reg_unreg);
 void register_node(Node *node);
 void unregister_nodes();
-#endif /* XLFPARSER */
+#endif /* XLFNODE_H */
 
