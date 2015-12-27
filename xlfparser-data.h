@@ -19,11 +19,6 @@ typedef enum _XlfNodeType {
 
 } NodeType;
 
-typedef struct _XlfKeyVal {
-    char *key;
-    char *value;
-} KeyVal;
-
 
 typedef struct _XlfNode {
     void *data;

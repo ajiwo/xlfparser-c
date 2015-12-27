@@ -82,3 +82,62 @@ int node_length(Node *node) {
 
     return length;
 }
+
+/**
+ * @brief delete the last child of a given node.
+ * @param node
+ * @return the node length after deletion
+ */
+int node_delete_last(Node **node) {
+    Node *iter = NULL;
+    Node *delme = NULL;
+    Node *last = NULL;
+
+    /* not a node i know */
+    if(node == NULL) {
+        return 0;
+    }
+
+    /* there's only one node, alone.. */
+    if((*node)->first == (*node) && (*node)->last == (*node)) {
+
+        free(*node);
+        *node = NULL;
+        return 0;
+    }
+
+    /* the node to delete is current node index? move index to prev */
+    if((*node)->last == *node) {
+        *node = (*node)->prev;
+    }
+
+    delme = (*node)->last;
+    last = delme->prev;
+
+    last->last = last;
+    last->next = NULL;
+
+    iter = (*node)->first;
+    while(iter && iter != delme) {
+        iter->last = last;
+        iter = iter->next;
+    }
+
+    free(delme);
+    delme = NULL;
+
+    return node_length(*node);
+}
+
+/**
+ * @brief completely delete a node.
+ * @param node
+ * @return the length of node after deletion.
+ */
+int node_delete_all(Node **node) {
+    while(*node) {
+        node_delete_last(node);
+    }
+
+    return node_length(*node);
+}

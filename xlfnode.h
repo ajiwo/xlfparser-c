@@ -4,39 +4,41 @@
 #include <stdlib.h>
 #include "xlfparser-data.h"
 
+/**
+ * @brief create an new node.
+ * @return pointer to the newly created node or NULL if failed
+ */
 Node *node_new();
-int node_prepend(Node **nodes, Node *child);
-int node_append(Node **nodes, Node *child);
 
-/*
- * move node current position to index
+/**
+ * @brief append an initialized child node to the end of nodes.
+ * @param parent the existing node with at least contains one node
+ * @param child node to be appended, created by node_new()
+ * @return the new parent length/size after appending the child, or 0 if failed.
+ * @see node_new()
  */
-void node_move_to(Node **nodes, int index);
+int node_append(Node **parent, Node *child);
 
-/*
- * get node at position index
+/**
+ * @brief get the length/size of a given node.
+ * @param node
+ * @return the node length/size
  */
-Node *node_get(Node **nodes, int index);
-
-/*
- * get current index
- */
-int node_index(Node *nodes);
-
-
-int maybe_valid_node(Node *node);
 int node_length(Node *node);
 
-/* map-like node for implementing layout option, region option, media option, media raw,.. */
-Node *keyval_new();
+/**
+ * @brief delete the last child of a given node.
+ * @param node
+ * @return the node length after deletion
+ */
+int node_delete_last(Node **node);
 
-/* will be useful for funcs like: layout_add_tag(), region_add_option(), media_add_option(),.. */
-void node_add_keyval(Node **keyval_node, char *key, char *value);
+/**
+ * @brief completely delete a node.
+ * @param node
+ * @return the length of node after deletion.
+ */
+int node_delete_all(Node **node);
 
-
-/* registry to free (m|c)alloc-ated heap */
-void _regunreg_node(Node *node, int reg_unreg);
-void register_node(Node *node);
-void unregister_nodes();
 #endif /* XLFNODE_H */
 
