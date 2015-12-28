@@ -42,5 +42,11 @@ int node_delete_last(Node **node);
  */
 int node_delete_all(Node **node);
 
+/**
+ * @brief helper for copying string
+ * @param src source string
+ * @return pointer to the copied string.
+ */
+char *xlf_strcpy(const char *src);
 #endif /* XLFNODE_H */
 

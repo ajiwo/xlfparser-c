@@ -141,3 +141,13 @@ int node_delete_all(Node **node) {
 
     return node_length(*node);
 }
+
+char *xlf_strcpy(const char *src) {
+    int len;
+    char *dst;
+
+    len = strlen(src);
+    dst = malloc(len + 1);
+    dst[len] = '\0';
+    return memcpy(dst, src, len);
+}

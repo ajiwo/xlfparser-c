@@ -10,22 +10,10 @@ Node *keyval_new(const char *key, const char *value) {
     Node *node;
     KeyVal *keyval;
 
-    char *_key, *_val;
-    int kl, vl;
-
-    kl = strlen(key);
-    vl = strlen(value);
-
-    _key = malloc(kl + 1);
-    _key[kl] = '\0';
-
-    _val = malloc(vl + 1);
-    _val[vl] = '\0';
-
     node = node_new();
     keyval = malloc(sizeof(KeyVal));
-    keyval->key = memcpy(_key, key, kl);
-    keyval->value = memcpy(_val, value, vl);
+    keyval->key = xlf_strcpy(key);
+    keyval->value = xlf_strcpy(value);
     node->data = keyval;
     node->_type = XLF_NODE_KEYVAL;
     return node;

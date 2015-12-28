@@ -74,15 +74,8 @@ Node *tag_new(const char *tagname) {
     Node *node;
     LayoutTag *tag;
 
-    char *_tagname;
-    int len;
-
-    len = strlen(tagname);
-    _tagname = malloc(len + 1);
-    _tagname[len] = '\0';
-
     tag = malloc(sizeof(LayoutTag));
-    tag->tag = memcpy(_tagname, tagname, len);
+    tag->tag = xlf_strcpy(tagname);
 
     node = node_new();
     node->data = (LayoutTag *) tag;
