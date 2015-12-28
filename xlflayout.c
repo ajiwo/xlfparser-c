@@ -29,6 +29,10 @@ int layout_delete_last(Node **node) {
     tag_delete_all(&(layout->tags));
     region_delete_all(&(layout->regions));
 
+    free(layout->bgcolor);
+    layout->bgcolor = NULL;
+    free(layout->background);
+    layout->background = NULL;
     free(layout);
     layout = NULL;
 

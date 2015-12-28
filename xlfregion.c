@@ -29,6 +29,8 @@ int region_delete_last(Node **node) {
     keyval_delete_all(&(region->options));
     media_delete_all(&(region->media));
 
+    free(region->id);
+    region->id = NULL;
     free(region);
     region = NULL;
 

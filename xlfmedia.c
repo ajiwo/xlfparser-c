@@ -29,7 +29,12 @@ int media_delete_last(Node **node) {
 
     keyval_delete_all(&(media->options));
     keyval_delete_all(&(media->raws));
-
+    free(media->id);
+    media->id = NULL;
+    free(media->type);
+    media->type = NULL;
+    free(media->render);
+    media->render = NULL;
     free(media);
     media = NULL;
 
