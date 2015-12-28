@@ -5,6 +5,8 @@
 #include "xlflayout.h"
 
 Node *parse_layout(const char *xlf_file);
-#endif
+#else
+void xlfparser_roxml_dummy();
+#endif /* XLFPARSER_USE_LIBROXML */
 #endif /* XLFPARSER_ROXML_H */
 

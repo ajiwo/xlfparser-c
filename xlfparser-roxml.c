@@ -203,4 +203,7 @@ Node *parse_layout(const char *srcfile) {
     roxml_close(doc_rnode);
     return layout_xnode;
 }
+#else
+void xlfparser_roxml_dummy() {}
+
 #endif /* XLFPARSER_USE_LIBROXML */
