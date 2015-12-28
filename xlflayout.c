@@ -7,6 +7,8 @@ Node *layout_new() {
     layout = malloc(sizeof(Layout));
     layout->regions = NULL;
     layout->tags = NULL;
+    layout->background = NULL;
+    layout->bgcolor = NULL;
 
     node = node_new();
     node->data = (Layout *) layout;
@@ -29,10 +31,15 @@ int layout_delete_last(Node **node) {
     tag_delete_all(&(layout->tags));
     region_delete_all(&(layout->regions));
 
-    free(layout->bgcolor);
-    layout->bgcolor = NULL;
-    free(layout->background);
-    layout->background = NULL;
+    if(layout->bgcolor) {
+        free(layout->bgcolor);
+        layout->bgcolor = NULL;
+    }
+
+    if(layout->background) {
+        free(layout->background);
+        layout->background = NULL;
+    }
     free(layout);
     layout = NULL;
 
