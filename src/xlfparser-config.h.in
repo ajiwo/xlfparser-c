@@ -1,0 +1,3 @@
+#cmakedefine XLFPARSER_USE_LIBROXML
+#cmakedefine XLFPARSER_USE_LIBXML2
+

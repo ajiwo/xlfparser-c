@@ -1,6 +1,6 @@
 #ifndef XLFPARSER_H
 #define XLFPARSER_H
-
+#include "xlfparser-config.h"
 #ifdef XLFPARSER_USE_LIBROXML
 #include "xlfparser-roxml.h"
 #endif
