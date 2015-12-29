@@ -1,5 +1,8 @@
 #ifndef XLFPARSER_ROXML_H
 #define XLFPARSER_ROXML_H
+
+#include "xlfparser-config.h"
+
 #ifdef XLFPARSER_USE_LIBROXML
 #include <roxml.h>
 #include "xlflayout.h"

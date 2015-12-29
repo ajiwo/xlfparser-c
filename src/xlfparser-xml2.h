@@ -1,6 +1,8 @@
 #ifndef XLFPARSERLIBXML2_H
 #define XLFPARSERLIBXML2_H
 
+#include "xlfparser-config.h"
+
 #ifdef XLFPARSER_USE_LIBXML2
 #include <libxml/xmlreader.h>
 #include "xlflayout.h"
