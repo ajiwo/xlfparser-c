@@ -1,6 +1,6 @@
-add_executable(xlfparserapp example.c)
-target_link_libraries(xlfxample LINK_PUBLIC xlfparser ${xlfparser_libs}) 
-target_include_directories(xlfxample PUBLIC ${CMAKE_SOURCE_DIR}/${xlfparser_src})
+add_executable(xlfsample example.c)
+target_link_libraries(xlfsample LINK_PUBLIC xlfparser ${xlfparser_libs})
+target_include_directories(xlfsample PUBLIC ${CMAKE_SOURCE_DIR}/${xlfparser_src})
 
-install(TARGETS xlfxsample DESTINATION bin)
+install(TARGETS xlfsample DESTINATION bin)
 
