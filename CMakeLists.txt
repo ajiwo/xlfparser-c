@@ -75,6 +75,8 @@ elseif(LIBROXML_FOUND)
 elseif(LIBXML2_FOUND)
     m_use_libxml2()
 else()
+    message("++ Neither libroxml or libxml2 is found.")
+    message("++ Cannot continue, now exiting.. ")
     return()
 endif()
 
@@ -84,8 +86,6 @@ configure_file(
     @ONLY
 )
 
-
 add_subdirectory("${xlfparser_src}")
 add_subdirectory("${xlfparser_example}")
-
 

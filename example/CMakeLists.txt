@@ -1,6 +1,6 @@
 add_executable(xlfsample example.c)
 target_link_libraries(xlfsample LINK_PUBLIC xlfparser ${xlfparser_libs})
-target_include_directories(xlfsample PUBLIC ${CMAKE_SOURCE_DIR}/${xlfparser_src})
+set_target_properties(xlfsample PROPERTIES  COMPILE_FLAGS "-I${CMAKE_SOURCE_DIR}/${xlfparser_src} -I${xlfparser_include_dir}")
 
 install(TARGETS xlfsample DESTINATION bin)
 
