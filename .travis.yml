@@ -1,5 +1,8 @@
 language: c
 install: true
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y libxml2-dev
 script:
   - rm -rf build
   - mkdir build
