@@ -16,7 +16,7 @@ set(xlfparser_headers
     xlfparser-config.h
 )
 
-set(xlfparser_base_srcs xlfnode.c xlfkeyval.c xlfmedia.c xlfregion.c xlflayout.c)
+set(xlfparser_base_srcs xlfnode.c xlfkeyval.c xlfmedia.c xlfregion.c xlflayout.c xlfparser.c)
 set(xlfparser_roxml_srcs ${xlfparser_base_srcs} xlfparser-roxml.c)
 set(xlfparser_xml2_srcs ${xlfparser_base_srcs} xlfparser-xml2.c)
 

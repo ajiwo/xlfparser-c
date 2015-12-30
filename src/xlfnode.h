@@ -21,12 +21,21 @@ Node *node_new();
  */
 int node_append(Node **parent, Node *child);
 
+
 /**
  * @brief get the length/size of a given node.
  * @param node
  * @return the node length/size
  */
 int node_length(Node *node);
+
+/**
+ * @brief get a node from list
+ * @param node
+ * @param index
+ * @return the node at index or NULL if failed.
+ */
+Node *node_get(Node *node, int index);
 
 /**
  * @brief delete the last child of a given node.

@@ -61,6 +61,21 @@ int node_append(Node **parent, Node *child) {
 
     return node_length(*parent);
 }
+
+/**
+ * @brief move node position to index
+ * @param nodes
+ * @param index
+ */
+void node_at(Node **nodes, int index) {
+    int i = 0;
+    *nodes = (*nodes)->first;
+    while((*nodes)->next && i != index) {
+        *nodes = (*nodes)->next;
+        i++;
+    }
+}
+
 /**
  * @brief get the length/size of a given node.
  * @param node
@@ -81,6 +96,25 @@ int node_length(Node *node) {
     }
 
     return length;
+}
+
+
+Node *node_get(Node *node, int index) {
+    Node *iter;
+    int i = 0;
+
+    i = index > -1 ? i : 0;
+
+    iter = node->first;
+    while(iter) {
+        if(i == index) {
+            return iter;
+        }
+        iter = iter->next;
+        i++;
+    }
+
+    return NULL;
 }
 
 /**

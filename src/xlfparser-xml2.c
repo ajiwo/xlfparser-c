@@ -46,16 +46,18 @@ void parse_region_option(node_t *option_rnode, Node *region_xnode) {
 
 void parse_media_option(node_t *option_rnode, Node *media_xnode) {
     node_t *option_child;
-    xmlChar *key, *val;
+    xmlChar *val;
 
     option_child = option_rnode->children;
     while(option_child) {
-        key = xmlNodeGetContent(option_child);
+        if(option_child->type != XML_ELEMENT_NODE) {
+            option_child = option_child->next;
+            continue;
+        }
         val = xmlNodeGetContent(option_child);
 
-        media_add_option(&media_xnode, (const char *) key, (const char *) val);
+        media_add_option(&media_xnode, (const char *) option_child->name, (const char *) val);
 
-        xmlFree(key);
         xmlFree(val);
 
         option_child = option_child->next;
@@ -134,6 +136,23 @@ void parse_regions(node_t *layout_rnode, Node *layout_xnode) {
     layout_add_region(&layout_xnode, region_xnode);
 
 }
+
+void parse_tags(node_t *layout_rnode, Node *layout_xnode) {
+    xmlChar *tag_name;
+    node_t *tag_rnode;
+
+
+    tag_rnode = layout_rnode->children;
+    while(tag_rnode) {
+        if(is_element_name(tag_rnode, "tag")) {
+            tag_name = xmlNodeGetContent(tag_rnode);
+            layout_add_tag(&layout_xnode, (const char *) tag_name);
+            xmlFree(tag_name);
+        }
+        tag_rnode = tag_rnode->next;
+    }
+}
+
 Node *parse_layout(const char *xlf_file) {
     xmlDoc *doc;
     node_t *node, *child;
@@ -173,6 +192,8 @@ Node *parse_layout(const char *xlf_file) {
     while(child) {
         if(is_element_name(child, "region")) {
             parse_regions(child, layout_xnode);
+        } else if(is_element_name(child, "tags")) {
+            parse_tags(child, layout_xnode);
         }
         child = child->next;
     }
@@ -181,6 +202,7 @@ Node *parse_layout(const char *xlf_file) {
     xmlCleanupParser();
     return layout_xnode;
 }
+
 #else
 void xlfparser_xml2_dummy() {}
 
