@@ -1,0 +1,41 @@
+#include "../src/xlfparser.h"
+#include "test-config.h"
+#include <stdio.h>
+
+
+int main(int argc, char **argv) {
+    Node *layout_node;
+    Layout *layout;
+    char *arg;
+    int failed = 0;
+
+    if(argc < 2) {
+        return 1;
+    }
+
+    layout_node = xlfparser_parse_file(XLF_PATH);
+    if(!layout_node) {
+        return 2;
+    }
+
+    layout = xlfparser_get_layout(layout_node);
+    arg = argv[1];
+
+    if(!strcmp(arg, "dummy")) {
+        printf("dummy\n");
+    }
+    else if(!strcmp(arg, "width")) {
+        printf("%d\n", layout->width);
+    } else if(!strcmp(arg, "height")) {
+        printf("%d\n", layout->height);
+    } else if(!strcmp(arg, "bgcolor")) {
+        printf("%s\n", layout->bgcolor);
+    } else if(!strcmp(arg, "background")) {
+        printf("%s\n", layout->background);
+    } else {
+        failed = 1;
+    }
+    layout_delete_all(&layout_node);
+
+    return failed;
+}

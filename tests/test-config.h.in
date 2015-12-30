@@ -1,0 +1,2 @@
+#cmakedefine XLF_PATH "@XLF_PATH@"
+

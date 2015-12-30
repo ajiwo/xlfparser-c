@@ -1,10 +1,13 @@
 cmake_minimum_required (VERSION 2.8.0)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
+
 set(xlfparser_src src)
 set(xlfparser_example example)
+set(xlfparser_test tests)
 
 project(xlfparser)
+include(CTest)
 
 set(xlfparser_headers
     xlfnode.h
@@ -88,4 +91,5 @@ configure_file(
 
 add_subdirectory("${xlfparser_src}")
 add_subdirectory("${xlfparser_example}")
+add_subdirectory("${xlfparser_test}")
 
