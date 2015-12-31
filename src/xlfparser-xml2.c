@@ -71,6 +71,10 @@ void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
 
     raw_child = raw_rnode->children;
     while(raw_child) {
+        if(raw_child->type != XML_ELEMENT_NODE) {
+            raw_child = raw_child->next;
+            continue;
+        }
         key = xlf_strcpy((const char*)  raw_child->name);
         val = xmlNodeGetContent(raw_child);
 

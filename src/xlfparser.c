@@ -148,7 +148,6 @@ int xlfparser_media_option_length(Node *xlf_node) {
     return -1;
 }
 
-
 MediaOption *xlfparser_get_media_option(Node *xlf_node, int index) {
     Media *media;
     Node *option_node;
@@ -156,6 +155,35 @@ MediaOption *xlfparser_get_media_option(Node *xlf_node, int index) {
     if(xlf_node->_type == XLF_NODE_MEDIA) {
         media = xlf_node->data;
         option_node = node_get(media->options, index);
+    } else if(xlf_node->_type == XLF_NODE_KEYVAL) {
+        option_node = node_get(xlf_node, index);
+    } else {
+        option_node = NULL;
+    }
+    return option_node ? option_node->data : NULL;
+}
+
+int xlfparser_media_raw_length(Node *xlf_node) {
+    Media *media;
+
+    if(xlf_node->_type == XLF_NODE_KEYVAL) {
+        return node_length(xlf_node);
+    }
+    if(xlf_node->_type == XLF_NODE_MEDIA) {
+        media = xlf_node->data;
+        return node_length(media->raws);
+    }
+
+    return -1;
+}
+
+MediaRaw *xlfparser_get_media_raw(Node *xlf_node, int index) {
+    Media *media;
+    Node *option_node;
+    /* TODO: implement this technique to other similar function */
+    if(xlf_node->_type == XLF_NODE_MEDIA) {
+        media = xlf_node->data;
+        option_node = node_get(media->raws, index);
     } else if(xlf_node->_type == XLF_NODE_KEYVAL) {
         option_node = node_get(xlf_node, index);
     } else {
