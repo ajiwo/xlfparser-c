@@ -145,20 +145,24 @@ int node_delete_last(Node **node) {
         *node = (*node)->prev;
     }
 
-    delme = (*node)->last;
-    last = delme->prev;
+    /* (*node)->last maybe previously freed */
+    if((*node)->last) {
+        delme = (*node)->last;
+        last = delme->prev;
 
-    last->last = last;
-    last->next = NULL;
+        last->last = last;
+        last->next = NULL;
 
-    iter = (*node)->first;
-    while(iter && iter != delme) {
-        iter->last = last;
-        iter = iter->next;
+        iter = (*node)->first;
+        while(iter && iter != delme) {
+            iter->last = last;
+            iter = iter->next;
+        }
+
+        free(delme);
+        delme = NULL;
+
     }
-
-    free(delme);
-    delme = NULL;
 
     return node_length(*node);
 }
