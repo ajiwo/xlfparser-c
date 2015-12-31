@@ -8,6 +8,14 @@ add_library(xlfparser SHARED ${xlfparser_srcs})
 set_target_properties(xlfparser PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic -I${xlfparser_include_dir}")
 
 
-install(TARGETS xlfparser DESTINATION lib)
-install(FILES ${xlfparser_headers} DESTINATION include/xlfparser)
+install(
+    TARGETS xlfparser
+    DESTINATION lib
+    PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE
+)
+install(
+    FILES ${xlfparser_install_headers}
+    DESTINATION include/xlfparser
+    PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ
+)
 

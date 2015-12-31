@@ -16,7 +16,13 @@ set(xlfparser_headers
     xlfregion.h
     xlflayout.h
     xlfparser.h
+    xlfparser-data.h
     xlfparser-config.h
+)
+set(xlfparser_install_headers
+    xlfparser-config.h
+    xlfparser-data.h
+    xlfparser.h
 )
 
 set(xlfparser_base_srcs xlfnode.c xlfkeyval.c xlfmedia.c xlfregion.c xlflayout.c xlfparser.c)
