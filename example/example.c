@@ -100,5 +100,5 @@ int main(int argc, char **argv) {
 
 
 
-    return layout_delete_all(&layout_xnode);
+    return xlfparser_delete_layout(layout_xnode);
 }

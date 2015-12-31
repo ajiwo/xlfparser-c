@@ -5,7 +5,7 @@ add_library(xlfparser SHARED ${xlfparser_srcs})
 #elseif(XLFPARSER_USE_LIBXML2)
 #    set_target_properties(xlfparser PROPERTIES  COMPILE_DEFINITIONS XLFPARSER_USE_LIBXML2)
 #endif()
-set_target_properties(xlfparser PROPERTIES COMPILE_FLAGS "-ansi -pedantic -I${xlfparser_include_dir}")
+set_target_properties(xlfparser PROPERTIES COMPILE_FLAGS "-Wall -ansi -pedantic -I${xlfparser_include_dir}")
 
 
 install(TARGETS xlfparser DESTINATION lib)

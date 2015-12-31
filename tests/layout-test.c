@@ -32,6 +32,10 @@ int main(int argc, char **argv) {
         printf("%s\n", layout->bgcolor);
     } else if(!strcmp(arg, "background")) {
         printf("%s\n", layout->background);
+    } else if(!strcmp(arg, "numtag")) {
+        printf("%d\n", xlfparser_tag_length(layout_node));
+    } else if(!strcmp(arg, "numregion")) {
+        printf("%d\n", xlfparser_region_length(layout_node));
     } else {
         failed = 1;
     }
