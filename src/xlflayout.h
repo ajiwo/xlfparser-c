@@ -2,20 +2,6 @@
 #define XLFLAYOUT_H
 #include "xlfregion.h"
 
-typedef struct _XlfLayoutTag {
-    char *tag;
-} LayoutTag;
-
-typedef struct _XlfLayout {
-    int width;
-    int height;
-    char *bgcolor;
-    char *background;
-
-    Node *tags;
-    Node *regions;
-} Layout;
-
 Node *layout_new();
 int layout_delete_last(Node **node);
 int layout_delete_all(Node **node);

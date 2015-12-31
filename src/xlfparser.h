@@ -1,7 +1,7 @@
 #ifndef XLFPARSER_H
 #define XLFPARSER_H
 #include "xlfparser-config.h"
-#include "xlflayout.h"
+#include "xlfparser-data.h"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -105,6 +105,8 @@ MediaOption *xlfparser_get_media_option(Node *xlf_node, int index);
  */
 int xlfparser_delete_layout(Node *xlf_node);
 
+
+int xlfparser_node_length(Node *xlf_node);
 #ifdef	__cplusplus
 }
 #endif

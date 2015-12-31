@@ -2,19 +2,6 @@
 #define XLFREGION_H
 #include "xlfmedia.h"
 
-typedef struct _XlfKeyVal RegionOption;
-
-typedef struct _XlfRegion {
-    char *id;
-    int width;
-    int height;
-    int left;
-    int top;
-
-    Node *media;
-    Node *options;
-} Region;
-
 Node *region_new();
 
 int region_delete_last(Node **node);

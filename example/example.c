@@ -1,5 +1,7 @@
 #include "xlfparser.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 
 
@@ -30,7 +32,7 @@ int main(int argc, char **argv) {
            layout->height,
            layout->bgcolor,
            layout->background);
-    length = node_length(layout->regions);
+    length = xlfparser_node_length(layout->regions);
     for(i = 0; i < length; i++) {
         region = xlfparser_get_region(layout->regions, i);
         printf("region id: '%s', width: %d, height: %d, left: %d, top: %d\n",

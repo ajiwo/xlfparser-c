@@ -1,3 +1,4 @@
+#include "xlflayout.h"
 #include "xlfparser.h"
 
 #ifdef XLFPARSER_USE_LIBROXML
@@ -169,4 +170,8 @@ int xlfparser_delete_layout(Node *xlf_node) {
         return -1;
     }
     return layout_delete_all(&xlf_node);
+}
+
+int xlfparser_node_length(Node *xlf_node) {
+    return node_length(xlf_node);
 }

@@ -1,6 +1,9 @@
 #include "../src/xlfparser.h"
 #include "test-config.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 
 
 int main(int argc, char **argv) {
@@ -39,7 +42,7 @@ int main(int argc, char **argv) {
     } else {
         failed = 1;
     }
-    layout_delete_all(&layout_node);
+    xlfparser_delete_layout(layout_node);
 
     return failed;
 }

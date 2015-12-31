@@ -4,12 +4,6 @@
 #include "xlfnode.h"
 
 
-typedef struct _XlfKeyVal {
-    char *key;
-    char *value;
-} KeyVal;
-
-
 /**
  * @brief create a new key:value node
  * @return pointer to the newly created node or NULL if failed
