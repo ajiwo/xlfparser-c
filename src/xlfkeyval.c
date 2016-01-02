@@ -6,14 +6,14 @@
  * @param value
  * @return pointer to the newly created node or NULL if failed
  */
-Node *keyval_new(const char *key, const char *value) {
-    Node *node;
+xlfNode *keyval_new(const char *key, const char *value) {
+    xlfNode *node;
     KeyVal *keyval;
 
     node = node_new();
     keyval = malloc(sizeof(KeyVal));
-    keyval->key = xlf_strcpy(key);
-    keyval->value = xlf_strcpy(value);
+    keyval->key = _xlf_strcpy(key);
+    keyval->value = _xlf_strcpy(value);
     node->data = keyval;
     node->_type = XLF_NODE_KEYVAL;
     return node;
@@ -27,7 +27,7 @@ Node *keyval_new(const char *key, const char *value) {
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see keyval_new()
  */
-int keyval_append(Node **parent, const char *key, const char *value) {
+int keyval_append(xlfNode **parent, const char *key, const char *value) {
     return node_append(parent, keyval_new(key, value));
 }
 
@@ -36,8 +36,8 @@ int keyval_append(Node **parent, const char *key, const char *value) {
  * @param node
  * @return the keyval node length after deletion
  */
-int keyval_delete_last(Node **node) {
-    Node *last;
+int keyval_delete_last(xlfNode **node) {
+    xlfNode *last;
     KeyVal *keyval;
 
     if(!node || !(*node)) {
@@ -64,7 +64,7 @@ int keyval_delete_last(Node **node) {
  * @param node
  * @return the length of node after deletion.
  */
-int keyval_delete_all(Node **node) {
+int keyval_delete_all(xlfNode **node) {
     while(*node) {
         keyval_delete_last(node);
     }
