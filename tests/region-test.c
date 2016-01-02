@@ -7,7 +7,7 @@
 
 
 int main(int argc, char **argv) {
-    Node *layout_node;
+    xlfNode *layout_node;
     Region *region;
     char *arg1;
     int region_index;

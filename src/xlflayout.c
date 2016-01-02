@@ -1,7 +1,7 @@
 #include "xlflayout.h"
 
-Node *layout_new() {
-    Node *node;
+xlfNode *layout_new() {
+    xlfNode *node;
     Layout *layout;
 
     layout = malloc(sizeof(Layout));
@@ -17,8 +17,8 @@ Node *layout_new() {
     return node;
 }
 
-int layout_delete_last(Node **node) {
-    Node *last;
+int layout_delete_last(xlfNode **node) {
+    xlfNode *last;
     Layout *layout;
 
     if(!node || !(*node)) {
@@ -46,7 +46,7 @@ int layout_delete_last(Node **node) {
     return node_delete_last(node);
 }
 
-int layout_delete_all(Node **node) {
+int layout_delete_all(xlfNode **node) {
     while(*node) {
         layout_delete_last(node);
     }
@@ -54,7 +54,7 @@ int layout_delete_all(Node **node) {
     return node_length(*node);
 }
 
-void layout_add_region(Node **layout_node, Node *region_node) {
+void layout_add_region(xlfNode **layout_node, xlfNode *region_node) {
     Layout *layout;
 
     layout = (*layout_node)->data;
@@ -66,7 +66,7 @@ void layout_add_region(Node **layout_node, Node *region_node) {
 }
 
 
-void layout_add_tag(Node **layout_node, const char *tagname) {
+void layout_add_tag(xlfNode **layout_node, const char *tagname) {
     Layout *layout;
 
     layout = (*layout_node)->data;
@@ -77,12 +77,12 @@ void layout_add_tag(Node **layout_node, const char *tagname) {
     }
 }
 
-Node *tag_new(const char *tagname) {
-    Node *node;
+xlfNode *tag_new(const char *tagname) {
+    xlfNode *node;
     LayoutTag *tag;
 
     tag = malloc(sizeof(LayoutTag));
-    tag->tag = xlf_strcpy(tagname);
+    tag->tag = _xlf_strcpy(tagname);
 
     node = node_new();
     node->data = (LayoutTag *) tag;
@@ -91,8 +91,8 @@ Node *tag_new(const char *tagname) {
     return node;
 }
 
-int tag_delete_last(Node **node) {
-    Node *last;
+int tag_delete_last(xlfNode **node) {
+    xlfNode *last;
     LayoutTag *tag;
 
     if(!node || !(*node)) {
@@ -112,7 +112,7 @@ int tag_delete_last(Node **node) {
 
 }
 
-int tag_delete_all(Node **node) {
+int tag_delete_all(xlfNode **node) {
     while(*node) {
         tag_delete_last(node);
     }

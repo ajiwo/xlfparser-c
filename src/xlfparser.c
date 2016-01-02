@@ -9,15 +9,15 @@
 #include "xlfparser-xml2.h"
 #endif
 
-Node *xlfparser_parse_file(const char *filename) {
+xlfNode *xlfparser_parse_file(const char *filename) {
     return parse_layout(filename);
 }
 
-Layout *xlfparser_get_layout(Node *xlf_node) {
+Layout *xlfparser_get_layout(xlfNode *xlf_node) {
     return (Layout *) xlf_node->data;
 }
 
-int xlfparser_region_length(Node *xlf_node) {
+int xlfparser_region_length(xlfNode *xlf_node) {
     Layout *layout;
 
     if(xlf_node->_type == XLF_NODE_REGION) {
@@ -31,9 +31,9 @@ int xlfparser_region_length(Node *xlf_node) {
     return -1;
 }
 
-Region *xlfparser_get_region(Node *xlf_node, int index) {
+Region *xlfparser_get_region(xlfNode *xlf_node, int index) {
     Layout *layout;
-    Node *region_node;
+    xlfNode *region_node;
     /* TODO: implement this technique to other similar function */
     if(xlf_node->_type == XLF_NODE_REGION) {
         region_node = node_get(xlf_node, index);
@@ -46,24 +46,26 @@ Region *xlfparser_get_region(Node *xlf_node, int index) {
     return region_node ? region_node->data : NULL;
 }
 
-int xlfparser_region_option_length(Node *xlf_node) {
+int xlfparser_region_option_length(xlfNode *xlf_node) {
     Region *region;
 
-    if(xlf_node->_type == XLF_NODE_KEYVAL) {
-        return node_length(xlf_node);
-    }
-    if(xlf_node->_type == XLF_NODE_REGION) {
-        region = xlf_node->data;
-        return node_length(region->options);
+    if(xlf_node) {
+        if(xlf_node->_type == XLF_NODE_KEYVAL) {
+            return node_length(xlf_node);
+        }
+        if(xlf_node->_type == XLF_NODE_REGION) {
+            region = xlf_node->data;
+            return node_length(region->options);
+        }
     }
 
     return -1;
 }
 
-RegionOption *xlfparser_get_region_option(Node *xlf_node, int index) {
+RegionOption *xlfparser_get_region_option(xlfNode *xlf_node, int index) {
     Region *region;
-    Node *option_list;
-    Node *option_node;
+    xlfNode *option_list;
+    xlfNode *option_node;
     /* TODO: implement this technique to other similar function */
     if(xlf_node->_type == XLF_NODE_REGION) {
         region = xlf_node->data;
@@ -77,7 +79,7 @@ RegionOption *xlfparser_get_region_option(Node *xlf_node, int index) {
     return option_node ? option_node->data : NULL;
 }
 
-int xlfparser_tag_length(Node *xlf_node) {
+int xlfparser_tag_length(xlfNode *xlf_node) {
     Layout *layout;
 
     if(xlf_node->_type == XLF_NODE_LAYOUT_TAG) {
@@ -90,7 +92,7 @@ int xlfparser_tag_length(Node *xlf_node) {
     }
 }
 
-int xlfparser_media_length(Node *xlf_node) {
+int xlfparser_media_length(xlfNode *xlf_node) {
     Region *region;
 
     if(xlf_node->_type == XLF_NODE_MEDIA) {
@@ -103,9 +105,9 @@ int xlfparser_media_length(Node *xlf_node) {
     }
 }
 
-char *xlfparser_get_tag(Node *xlf_node, int index) {
+char *xlfparser_get_tag(xlfNode *xlf_node, int index) {
     Layout *layout;
-    Node *tag_node;
+    xlfNode *tag_node;
 
     if(xlf_node->_type == XLF_NODE_LAYOUT_TAG) {
         tag_node = node_get(xlf_node, index);
@@ -118,9 +120,9 @@ char *xlfparser_get_tag(Node *xlf_node, int index) {
     return tag_node ? ((LayoutTag *)(tag_node)->data)->tag : NULL;
 }
 
-Media *xlfparser_get_media(Node *xlf_node, int index) {
+Media *xlfparser_get_media(xlfNode *xlf_node, int index) {
     Region *region;
-    Node *media_node;
+    xlfNode *media_node;
 
     if(xlf_node->_type == XLF_NODE_MEDIA) {
         media_node = node_get(xlf_node, index);
@@ -134,23 +136,25 @@ Media *xlfparser_get_media(Node *xlf_node, int index) {
     return media_node ? media_node->data : NULL;
 }
 
-int xlfparser_media_option_length(Node *xlf_node) {
+int xlfparser_media_option_length(xlfNode *xlf_node) {
     Media *media;
 
-    if(xlf_node->_type == XLF_NODE_KEYVAL) {
-        return node_length(xlf_node);
-    }
-    if(xlf_node->_type == XLF_NODE_MEDIA) {
-        media = xlf_node->data;
-        return node_length(media->options);
+    if(xlf_node) {
+        if(xlf_node->_type == XLF_NODE_KEYVAL) {
+            return node_length(xlf_node);
+        }
+        if(xlf_node->_type == XLF_NODE_MEDIA) {
+            media = xlf_node->data;
+            return node_length(media->options);
+        }
     }
 
     return -1;
 }
 
-MediaOption *xlfparser_get_media_option(Node *xlf_node, int index) {
+MediaOption *xlfparser_get_media_option(xlfNode *xlf_node, int index) {
     Media *media;
-    Node *option_node;
+    xlfNode *option_node;
     /* TODO: implement this technique to other similar function */
     if(xlf_node->_type == XLF_NODE_MEDIA) {
         media = xlf_node->data;
@@ -163,23 +167,25 @@ MediaOption *xlfparser_get_media_option(Node *xlf_node, int index) {
     return option_node ? option_node->data : NULL;
 }
 
-int xlfparser_media_raw_length(Node *xlf_node) {
+int xlfparser_media_raw_length(xlfNode *xlf_node) {
     Media *media;
 
-    if(xlf_node->_type == XLF_NODE_KEYVAL) {
-        return node_length(xlf_node);
-    }
-    if(xlf_node->_type == XLF_NODE_MEDIA) {
-        media = xlf_node->data;
-        return node_length(media->raws);
+    if(xlf_node) {
+        if(xlf_node->_type == XLF_NODE_KEYVAL) {
+            return node_length(xlf_node);
+        }
+        if(xlf_node->_type == XLF_NODE_MEDIA) {
+            media = xlf_node->data;
+            return node_length(media->raws);
+        }
     }
 
     return -1;
 }
 
-MediaRaw *xlfparser_get_media_raw(Node *xlf_node, int index) {
+MediaRaw *xlfparser_get_media_raw(xlfNode *xlf_node, int index) {
     Media *media;
-    Node *option_node;
+    xlfNode *option_node;
     /* TODO: implement this technique to other similar function */
     if(xlf_node->_type == XLF_NODE_MEDIA) {
         media = xlf_node->data;
@@ -192,7 +198,7 @@ MediaRaw *xlfparser_get_media_raw(Node *xlf_node, int index) {
     return option_node ? option_node->data : NULL;
 }
 
-int xlfparser_delete_layout(Node *xlf_node) {
+int xlfparser_delete_layout(xlfNode *xlf_node) {
 
     if(xlf_node == NULL || xlf_node->_type != XLF_NODE_LAYOUT) {
         return -1;
@@ -200,6 +206,6 @@ int xlfparser_delete_layout(Node *xlf_node) {
     return layout_delete_all(&xlf_node);
 }
 
-int xlfparser_node_length(Node *xlf_node) {
+int xlfparser_node_length(xlfNode *xlf_node) {
     return node_length(xlf_node);
 }

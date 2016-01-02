@@ -1,7 +1,7 @@
 #include "xlfregion.h"
 
-Node *region_new() {
-    Node *node;
+xlfNode *region_new() {
+    xlfNode *node;
     Region *region;
 
     region = malloc(sizeof(Region));
@@ -15,8 +15,8 @@ Node *region_new() {
     return node;
 }
 
-int region_delete_last(Node **node) {
-    Node *last;
+int region_delete_last(xlfNode **node) {
+    xlfNode *last;
     Region *region;
 
     if(!node || !(*node)) {
@@ -37,7 +37,7 @@ int region_delete_last(Node **node) {
     return node_delete_last(node);
 }
 
-int region_delete_all(Node **node) {
+int region_delete_all(xlfNode **node) {
     while(*node) {
         region_delete_last(node);
     }
@@ -45,7 +45,7 @@ int region_delete_all(Node **node) {
     return node_length(*node);
 }
 
-void region_add_media(Node **region_node, Node *media_node) {
+void region_add_media(xlfNode **region_node, xlfNode *media_node) {
     Region *region;
 
     region = (*region_node)->data;
@@ -56,7 +56,7 @@ void region_add_media(Node **region_node, Node *media_node) {
     }
 }
 
-void region_add_option(Node **region_node, const char *key, const char *value) {
+void region_add_option(xlfNode **region_node, const char *key, const char *value) {
     Region *region;
 
     region = (*region_node)->data;

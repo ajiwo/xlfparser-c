@@ -9,9 +9,9 @@ int main(int argc, char **argv) {
     Layout *layout;
     Region *region;
     Media *media;
-    Node *layout_xnode;
-    Node *region_xnode;
-    Node *media_xnode;
+    xlfNode *layout_xnode;
+    xlfNode *region_xnode;
+    xlfNode *media_xnode;
 
     int i;
     int length;
@@ -42,7 +42,6 @@ int main(int argc, char **argv) {
                region->left,
                region->top);
     }
-
     /* use API  } */
 
     printf("----\n");

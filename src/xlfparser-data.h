@@ -29,7 +29,7 @@ typedef struct _XlfNode {
     struct _XlfNode *next;
     struct _XlfNode *prev;
     struct _XlfNode *last;
-} Node;
+} xlfNode;
 
 
 typedef struct _XlfKeyVal {
@@ -48,8 +48,8 @@ typedef struct _XlfLayout {
     char *bgcolor;
     char *background;
 
-    Node *tags;
-    Node *regions;
+    xlfNode *tags;
+    xlfNode *regions;
 } Layout;
 
 typedef struct _XlfKeyVal RegionOption;
@@ -61,8 +61,8 @@ typedef struct _XlfRegion {
     int left;
     int top;
 
-    Node *media;
-    Node *options;
+    xlfNode *media;
+    xlfNode *options;
 } Region;
 
 typedef struct _XlfKeyVal MediaOption;
@@ -74,8 +74,8 @@ typedef struct _XlfMedia {
     int duration;
     char *render;
 
-    Node *options;
-    Node *raws;
+    xlfNode *options;
+    xlfNode *raws;
 } Media;
 
 #endif /* XLFPARSERDATA */

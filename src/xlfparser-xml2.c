@@ -9,7 +9,7 @@ char *get_attr_content(node_t *node, const char *name) {
     char *value;
 
     xml_value = xmlGetProp(node, (const xmlChar*) name);
-    value = xlf_strcpy((const char *)xml_value);
+    value = _xlf_strcpy((const char *)xml_value);
     xmlFree(xml_value);
     return value;
 }
@@ -25,26 +25,29 @@ int get_int_attr_content(node_t *node, const char *name) {
     return value;
 }
 
-void parse_region_option(node_t *option_rnode, Node *region_xnode) {
+void parse_region_option(node_t *option_rnode, xlfNode *region_xnode) {
     node_t *option_child;
 
-    xmlChar *key, *val;
+    xmlChar *val;
 
     option_child = option_rnode->children;
     while(option_child) {
-        key = xmlNodeGetContent(option_child);
+        if(option_child->type != XML_ELEMENT_NODE) {
+            option_child = option_child->next;
+            continue;
+        }
+
         val = xmlNodeGetContent(option_child);
 
-        region_add_option(&region_xnode, (const char *)key, (const char *)val);
+        region_add_option(&region_xnode, (const char *)option_child->name, (const char *)val);
 
-        xmlFree(key);
         xmlFree(val);
 
         option_child = option_child->next;
     }
 }
 
-void parse_media_option(node_t *option_rnode, Node *media_xnode) {
+void parse_media_option(node_t *option_rnode, xlfNode *media_xnode) {
     node_t *option_child;
     xmlChar *val;
 
@@ -64,7 +67,7 @@ void parse_media_option(node_t *option_rnode, Node *media_xnode) {
     }
 }
 
-void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
+void parse_media_raw(node_t *raw_rnode, xlfNode *media_xnode) {
     node_t *raw_child;
     char *key;
     xmlChar *val;
@@ -75,7 +78,7 @@ void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
             raw_child = raw_child->next;
             continue;
         }
-        key = xlf_strcpy((const char*)  raw_child->name);
+        key = _xlf_strcpy((const char*)  raw_child->name);
         val = xmlNodeGetContent(raw_child);
 
         media_add_raw(&media_xnode, (const char *) key, (const char *) val);
@@ -87,8 +90,8 @@ void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
     }
 }
 
-void parse_media(node_t *media_rnode, Node *region_xnode) {
-    Node *media_xnode;
+void parse_media(node_t *media_rnode, xlfNode *region_xnode) {
+    xlfNode *media_xnode;
     Media *media;
     node_t *media_child;
 
@@ -113,8 +116,8 @@ void parse_media(node_t *media_rnode, Node *region_xnode) {
 }
 
 
-void parse_regions(node_t *layout_rnode, Node *layout_xnode) {
-    Node *region_xnode;
+void parse_regions(node_t *layout_rnode, xlfNode *layout_xnode) {
+    xlfNode *region_xnode;
     node_t *region_child;
     Region *region;
 
@@ -141,7 +144,7 @@ void parse_regions(node_t *layout_rnode, Node *layout_xnode) {
 
 }
 
-void parse_tags(node_t *layout_rnode, Node *layout_xnode) {
+void parse_tags(node_t *layout_rnode, xlfNode *layout_xnode) {
     xmlChar *tag_name;
     node_t *tag_rnode;
 
@@ -157,10 +160,10 @@ void parse_tags(node_t *layout_rnode, Node *layout_xnode) {
     }
 }
 
-Node *parse_layout(const char *xlf_file) {
+xlfNode *parse_layout(const char *xlf_file) {
     xmlDoc *doc;
     node_t *node, *child;
-    Node *layout_xnode;
+    xlfNode *layout_xnode;
     Layout *layout;
 
     /*

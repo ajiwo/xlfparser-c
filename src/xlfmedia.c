@@ -1,7 +1,7 @@
 #include "xlfmedia.h"
 
-Node *media_new() {
-    Node *node = node_new();
+xlfNode *media_new() {
+    xlfNode *node = node_new();
     Media *media = malloc(sizeof(Media));
     media->options = NULL;
     media->raws = NULL;
@@ -12,12 +12,12 @@ Node *media_new() {
 /**
  * @see node_append()
  */
-int media_append(Node **parent, Node *child) {
+int media_append(xlfNode **parent, xlfNode *child) {
     return node_append(parent, child);
 }
 
-int media_delete_last(Node **node) {
-    Node *last;
+int media_delete_last(xlfNode **node) {
+    xlfNode *last;
     Media *media;
 
     if(!node || !(*node)) {
@@ -41,14 +41,14 @@ int media_delete_last(Node **node) {
     return node_delete_last(node);
 }
 
-int media_delete_all(Node **node) {
+int media_delete_all(xlfNode **node) {
     while(*node) {
         media_delete_last(node);
     }
     return node_length(*node);
 }
 
-void media_add_option(Node **media_node, const char *key, const char *value) {
+void media_add_option(xlfNode **media_node, const char *key, const char *value) {
     Media *media;
 
     media = (*media_node)->data;
@@ -59,7 +59,7 @@ void media_add_option(Node **media_node, const char *key, const char *value) {
     }
 }
 
-void media_add_raw(Node **media_node, const char *key, const char *value) {
+void media_add_raw(xlfNode **media_node, const char *key, const char *value) {
     Media *media;
 
     media = (*media_node)->data;

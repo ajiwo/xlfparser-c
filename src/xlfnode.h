@@ -10,7 +10,7 @@
  * @brief create an new node.
  * @return pointer to the newly created node or NULL if failed
  */
-Node *node_new();
+xlfNode *node_new();
 
 /**
  * @brief append an initialized child node to the end of nodes.
@@ -19,7 +19,7 @@ Node *node_new();
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see node_new()
  */
-int node_append(Node **parent, Node *child);
+int node_append(xlfNode **parent, xlfNode *child);
 
 
 /**
@@ -27,7 +27,7 @@ int node_append(Node **parent, Node *child);
  * @param node
  * @return the node length/size
  */
-int node_length(Node *node);
+int node_length(xlfNode *node);
 
 /**
  * @brief get a node from list
@@ -35,27 +35,27 @@ int node_length(Node *node);
  * @param index
  * @return the node at index or NULL if failed.
  */
-Node *node_get(Node *node, int index);
+xlfNode *node_get(xlfNode *node, int index);
 
 /**
  * @brief delete the last child of a given node.
  * @param node
  * @return the node length after deletion
  */
-int node_delete_last(Node **node);
+int node_delete_last(xlfNode **node);
 
 /**
  * @brief completely delete a node.
  * @param node
  * @return the length of node after deletion.
  */
-int node_delete_all(Node **node);
+int node_delete_all(xlfNode **node);
 
 /**
  * @brief helper for copying string
  * @param src source string
  * @return pointer to the copied string.
  */
-char *xlf_strcpy(const char *src);
+char *_xlf_strcpy(const char *src);
 #endif /* XLFNODE_H */
 

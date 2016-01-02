@@ -7,7 +7,7 @@
 
 
 int main(int argc, char **argv) {
-    Node *layout_node;
+    xlfNode *layout_node;
     Layout *layout;
     char *arg;
     int failed = 0;

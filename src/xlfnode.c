@@ -5,11 +5,11 @@
  * @brief create an new node.
  * @return pointer to the newly created node or NULL if failed
  */
-Node *node_new() {
-    Node *node;
+xlfNode *node_new() {
+    xlfNode *node;
     static int counter;
 
-    node = malloc(sizeof(Node));
+    node = malloc(sizeof(xlfNode));
 
     if(node == NULL) {
         return NULL;
@@ -33,8 +33,8 @@ Node *node_new() {
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see node_new()
  */
-int node_append(Node **parent, Node *child) {
-    Node *iter = NULL;
+int node_append(xlfNode **parent, xlfNode *child) {
+    xlfNode *iter = NULL;
 
     /* not a node i know */
     if(parent == NULL || child == NULL) {
@@ -67,7 +67,7 @@ int node_append(Node **parent, Node *child) {
  * @param nodes
  * @param index
  */
-void node_at(Node **nodes, int index) {
+void node_at(xlfNode **nodes, int index) {
     int i = 0;
     *nodes = (*nodes)->first;
     while((*nodes)->next && i != index) {
@@ -81,9 +81,9 @@ void node_at(Node **nodes, int index) {
  * @param node
  * @return the node length/size
  */
-int node_length(Node *node) {
+int node_length(xlfNode *node) {
     int length = 0;
-    Node *iter = NULL;
+    xlfNode *iter = NULL;
 
     if(node == NULL) {
         return 0;
@@ -99,8 +99,8 @@ int node_length(Node *node) {
 }
 
 
-Node *node_get(Node *node, int index) {
-    Node *iter;
+xlfNode *node_get(xlfNode *node, int index) {
+    xlfNode *iter;
     int i = 0;
 
     i = index > -1 ? i : 0;
@@ -122,10 +122,10 @@ Node *node_get(Node *node, int index) {
  * @param node
  * @return the node length after deletion
  */
-int node_delete_last(Node **node) {
-    Node *iter = NULL;
-    Node *delme = NULL;
-    Node *last = NULL;
+int node_delete_last(xlfNode **node) {
+    xlfNode *iter = NULL;
+    xlfNode *delme = NULL;
+    xlfNode *last = NULL;
 
     /* not a node i know */
     if(!node || !(*node)) {
@@ -172,7 +172,7 @@ int node_delete_last(Node **node) {
  * @param node
  * @return the length of node after deletion.
  */
-int node_delete_all(Node **node) {
+int node_delete_all(xlfNode **node) {
     while(*node) {
         node_delete_last(node);
     }
@@ -180,7 +180,7 @@ int node_delete_all(Node **node) {
     return node_length(*node);
 }
 
-char *xlf_strcpy(const char *src) {
+char *_xlf_strcpy(const char *src) {
     int len;
     char *dst;
 
