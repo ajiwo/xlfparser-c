@@ -14,11 +14,18 @@ xlfNode *xlfparser_parse_file(const char *filename) {
 }
 
 Layout *xlfparser_get_layout(xlfNode *xlf_node) {
+    if(xlf_node == NULL) {
+        return NULL;
+    }
     return (Layout *) xlf_node->data;
 }
 
 int xlfparser_region_length(xlfNode *xlf_node) {
     Layout *layout;
+
+    if(xlf_node == NULL) {
+        return -1;
+    }
 
     if(xlf_node->_type == XLF_NODE_REGION) {
         return node_length(xlf_node);
@@ -32,7 +39,7 @@ int xlfparser_region_length(xlfNode *xlf_node) {
 }
 
 Region *xlfparser_get_region(xlfNode *xlf_node, int index) {
-    Layout *layout = NULL;
+    Layout *layout;
     xlfNode *region_node = NULL;
 
     if(xlf_node) {

@@ -23,6 +23,7 @@ xlfNode *keyval_new(const char *key, const char *value, NodeType type) {
  * @param parent the existing keyval node which at least contains one node
  * @param key
  * @param value
+ * @param type
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see keyval_new()
  */
