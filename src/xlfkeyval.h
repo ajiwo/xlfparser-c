@@ -8,7 +8,7 @@
  * @brief create a new key:value node
  * @return pointer to the newly created node or NULL if failed
  */
-xlfNode *keyval_new(const char *key, const char *value);
+xlfNode *keyval_new(const char *key, const char *value, NodeType type);
 
 /**
  * @brief append an initialized child node to the end of nodes.
@@ -18,7 +18,7 @@ xlfNode *keyval_new(const char *key, const char *value);
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see keyval_new()
  */
-int keyval_append(xlfNode **parent, const char *key, const char *value);
+int keyval_append(xlfNode **parent, const char *key, const char *value, NodeType type);
 
 /**
  * @brief delete the last child of a given keyval node.

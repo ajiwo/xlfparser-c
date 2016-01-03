@@ -5,7 +5,7 @@
  * @brief create an new node.
  * @return pointer to the newly created node or NULL if failed
  */
-xlfNode *node_new() {
+xlfNode *node_new(NodeType type) {
     xlfNode *node;
     static int counter;
 
@@ -20,7 +20,7 @@ xlfNode *node_new() {
     node->next = NULL;
     node->first = node;
     node->last = node;
-    node->_type = XLF_NODE_UNKNOWN;
+    node->_type = type;
     node->_id = counter++;
 
     return node;

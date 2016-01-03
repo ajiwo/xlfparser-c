@@ -10,9 +10,9 @@ xlfNode *layout_new() {
     layout->background = NULL;
     layout->bgcolor = NULL;
 
-    node = node_new();
+    node = node_new(XLF_NODE_LAYOUT);
     node->data = (Layout *) layout;
-    node->_type = XLF_NODE_LAYOUT;
+
 
     return node;
 }
@@ -84,9 +84,9 @@ xlfNode *tag_new(const char *tagname) {
     tag = malloc(sizeof(LayoutTag));
     tag->tag = _xlf_strcpy(tagname);
 
-    node = node_new();
+    node = node_new(XLF_NODE_LAYOUT_TAG);
     node->data = (LayoutTag *) tag;
-    node->_type = XLF_NODE_LAYOUT_TAG;
+
 
     return node;
 }

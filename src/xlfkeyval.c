@@ -6,16 +6,15 @@
  * @param value
  * @return pointer to the newly created node or NULL if failed
  */
-xlfNode *keyval_new(const char *key, const char *value) {
+xlfNode *keyval_new(const char *key, const char *value, NodeType type) {
     xlfNode *node;
     KeyVal *keyval;
 
-    node = node_new();
+    node = node_new(type);
     keyval = malloc(sizeof(KeyVal));
     keyval->key = _xlf_strcpy(key);
     keyval->value = _xlf_strcpy(value);
     node->data = keyval;
-    node->_type = XLF_NODE_KEYVAL;
     return node;
 }
 
@@ -27,8 +26,8 @@ xlfNode *keyval_new(const char *key, const char *value) {
  * @return the new parent length/size after appending the child, or 0 if failed.
  * @see keyval_new()
  */
-int keyval_append(xlfNode **parent, const char *key, const char *value) {
-    return node_append(parent, keyval_new(key, value));
+int keyval_append(xlfNode **parent, const char *key, const char *value, NodeType type) {
+    return node_append(parent, keyval_new(key, value, type));
 }
 
 /**

@@ -8,9 +8,8 @@ xlfNode *region_new() {
     region->media = NULL;
     region->options = NULL;
 
-    node = node_new();
+    node = node_new(XLF_NODE_REGION);
     node->data = (Region *) region;
-    node->_type = XLF_NODE_REGION;
 
     return node;
 }
@@ -61,8 +60,8 @@ void region_add_option(xlfNode **region_node, const char *key, const char *value
 
     region = (*region_node)->data;
     if(!region->options) {
-        region->options = keyval_new(key, value);
+        region->options = keyval_new(key, value, XLF_NODE_REGION_OPTION);
     } else {
-        keyval_append(&(region->options), key, value);
+        keyval_append(&(region->options), key, value, XLF_NODE_REGION_OPTION);
     }
 }

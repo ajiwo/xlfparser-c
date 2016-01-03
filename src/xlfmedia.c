@@ -1,12 +1,11 @@
 #include "xlfmedia.h"
 
 xlfNode *media_new() {
-    xlfNode *node = node_new();
+    xlfNode *node = node_new(XLF_NODE_MEDIA);
     Media *media = malloc(sizeof(Media));
     media->options = NULL;
     media->raws = NULL;
     node->data = (Media *) media;
-    node->_type = XLF_NODE_MEDIA;
     return node;
 }
 /**
@@ -53,9 +52,9 @@ void media_add_option(xlfNode **media_node, const char *key, const char *value) 
 
     media = (*media_node)->data;
     if(!media->options) {
-        media->options = keyval_new(key, value);
+        media->options = keyval_new(key, value, XLF_NODE_MEDIA_OPTION);
     } else {
-        keyval_append(&(media->options), key, value);
+        keyval_append(&(media->options), key, value, XLF_NODE_MEDIA_OPTION);
     }
 }
 
@@ -64,8 +63,8 @@ void media_add_raw(xlfNode **media_node, const char *key, const char *value) {
 
     media = (*media_node)->data;
     if(!media->raws) {
-        media->raws = keyval_new(key, value);
+        media->raws = keyval_new(key, value, XLF_NODE_MEDIA_RAW);
     } else {
-        keyval_append(&(media->options), key, value);
+        keyval_append(&(media->options), key, value, XLF_NODE_MEDIA_RAW);
     }
 }

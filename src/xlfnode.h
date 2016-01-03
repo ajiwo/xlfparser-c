@@ -10,7 +10,7 @@
  * @brief create an new node.
  * @return pointer to the newly created node or NULL if failed
  */
-xlfNode *node_new();
+xlfNode *node_new(NodeType type);
 
 /**
  * @brief append an initialized child node to the end of nodes.
