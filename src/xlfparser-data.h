@@ -50,6 +50,8 @@ typedef struct _XlfLayout {
 
     xlfNode *tags;
     xlfNode *regions;
+
+    xlfNode *_node;
 } Layout;
 
 typedef struct _XlfKeyVal RegionOption;

@@ -13,7 +13,7 @@ xlfNode *layout_new() {
     node = node_new(XLF_NODE_LAYOUT);
     node->data = (Layout *) layout;
 
-
+    layout->_node = node;
     return node;
 }
 

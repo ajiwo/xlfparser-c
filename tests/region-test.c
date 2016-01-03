@@ -8,6 +8,7 @@
 
 int main(int argc, char **argv) {
     xlfNode *layout_node;
+    Layout *layout;
     Region *region;
     char *arg1;
     int region_index;
@@ -21,12 +22,12 @@ int main(int argc, char **argv) {
     if(!layout_node) {
         return 2;
     }
-
+    layout = xlfparser_get_layout(layout_node);
 
     arg1 = argv[1];
     region_index = atoi(argv[2]);
 
-    region = xlfparser_get_region(layout_node, region_index);
+    region = xlfparser_get_region(layout, region_index);
     if(!region) {
         return 3;
     }
@@ -45,11 +46,11 @@ int main(int argc, char **argv) {
     } else if(!strcmp(arg1, "top")) {
         printf("%d\n", region->top);
     } else if(!strcmp(arg1, "num_media")) {
-        printf("%d\n", xlfparser_media_length(region->media));
+        printf("%d\n", xlfparser_media_length(region));
     } else {
         failed = 1;
     }
-    xlfparser_delete_layout(layout_node);
+    xlfparser_delete_layout(layout);
 
     return failed;
 }

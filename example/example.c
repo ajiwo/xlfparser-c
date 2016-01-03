@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
     /* use API { */
 
-    /* the main function, got everything inside layout_xnode which can be iterate thru, see 'iterate way'*/
+    /* the main function, got everything inside layout_xnode which can be iterated thru, see 'iterate way'*/
     layout_xnode = xlfparser_parse_file(argv[1]);
 
     /* let's try the public API */
@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
            layout->background);
     length = xlfparser_node_length(layout->regions);
     for(i = 0; i < length; i++) {
-        region = xlfparser_get_region(layout->regions, i);
+        region = xlfparser_get_region(layout, i);
         printf("region id: '%s', width: %d, height: %d, left: %d, top: %d\n",
                region->id,
                region->width,
@@ -101,5 +101,5 @@ int main(int argc, char **argv) {
 
 
 
-    return xlfparser_delete_layout(layout_xnode);
+    return xlfparser_delete_layout(layout);
 }

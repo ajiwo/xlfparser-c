@@ -36,13 +36,13 @@ int main(int argc, char **argv) {
     } else if(!strcmp(arg, "background")) {
         printf("%s\n", layout->background);
     } else if(!strcmp(arg, "numtag")) {
-        printf("%d\n", xlfparser_tag_length(layout_node));
+        printf("%d\n", xlfparser_tag_length(layout));
     } else if(!strcmp(arg, "numregion")) {
-        printf("%d\n", xlfparser_region_length(layout_node));
+        printf("%d\n", xlfparser_region_length(layout));
     } else {
         failed = 1;
     }
-    xlfparser_delete_layout(layout_node);
+    xlfparser_delete_layout(layout);
 
     return failed;
 }
