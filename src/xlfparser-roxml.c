@@ -17,13 +17,13 @@ char* get_attr_content(node_t *node, const char *name) {
     char *attr_result;
     node_t *attr;
 
-    attr_name = xlf_strcpy(name);
+    attr_name = _xlf_strcpy(name);
     attr = roxml_get_attr(node, attr_name, 0);
     free(attr_name);
 
     attr_content = roxml_get_content(attr, NULL, 0, NULL);
 
-    attr_result = xlf_strcpy(attr_content);
+    attr_result = _xlf_strcpy(attr_content);
     roxml_release(attr_content);
 
     return attr_result;
@@ -40,7 +40,7 @@ int get_int_attr_content(node_t *node, const char *name) {
     return attr_result;
 }
 
-void parse_region_option(node_t *option_rnode, Node *region_xnode) {
+void parse_region_option(node_t *option_rnode, xlfNode *region_xnode) {
     node_t *option_child;
 
     char *key, *val;
@@ -59,7 +59,7 @@ void parse_region_option(node_t *option_rnode, Node *region_xnode) {
     }
 }
 
-void parse_media_option(node_t *option_rnode, Node *media_xnode) {
+void parse_media_option(node_t *option_rnode, xlfNode *media_xnode) {
     node_t *option_child;
     char *key, *val;
 
@@ -77,7 +77,7 @@ void parse_media_option(node_t *option_rnode, Node *media_xnode) {
     }
 }
 
-void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
+void parse_media_raw(node_t *raw_rnode, xlfNode *media_xnode) {
     node_t *raw_child;
     char *key, *val;
 
@@ -95,8 +95,8 @@ void parse_media_raw(node_t *raw_rnode, Node *media_xnode) {
     }
 }
 
-void parse_media(node_t *media_rnode, Node *region_xnode) {
-    Node *media_xnode;
+void parse_media(node_t *media_rnode, xlfNode *region_xnode) {
+    xlfNode *media_xnode;
     Media *media;
     node_t *media_child;
 
@@ -120,8 +120,8 @@ void parse_media(node_t *media_rnode, Node *region_xnode) {
     region_add_media(&region_xnode, media_xnode);
 }
 
-void parse_regions(node_t *layout_rnode, Node *layout_xnode) {
-    Node *region_xnode;
+void parse_regions(node_t *layout_rnode, xlfNode *layout_xnode) {
+    xlfNode *region_xnode;
     node_t *region_child;
     Region *region;
 
@@ -148,7 +148,7 @@ void parse_regions(node_t *layout_rnode, Node *layout_xnode) {
 
 }
 
-void parse_tags(node_t *layout_rnode, Node *layout_xnode) {
+void parse_tags(node_t *layout_rnode, xlfNode *layout_xnode) {
     char *tag_name;
     node_t *tag_rnode;
 
@@ -163,18 +163,18 @@ void parse_tags(node_t *layout_rnode, Node *layout_xnode) {
     }
 }
 
-Node *parse_layout(const char *srcfile) {
+xlfNode *parse_layout(const char *srcfile) {
     char *xlffile;
 
     node_t *doc_rnode;
     node_t *layout_rnode;
     node_t *child_rnode;
 
-    Node *layout_xnode = layout_new();
+    xlfNode *layout_xnode = layout_new();
     Layout *layout;
 
 
-    xlffile = xlf_strcpy(srcfile);
+    xlffile = _xlf_strcpy(srcfile);
     doc_rnode = roxml_load_doc(xlffile);
     layout_rnode = roxml_get_chld(doc_rnode, "layout", 0);
 
