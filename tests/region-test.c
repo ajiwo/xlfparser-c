@@ -14,11 +14,13 @@ int main(int argc, char **argv) {
     int region_index;
     int failed = 0;
 
+    int num_region, num_tag;
+
     if(argc < 2) {
         return 1;
     }
 
-    layout_node = xlfparser_parse_file(XLF_PATH);
+    layout_node = xlfparser_parse_file(XLF_PATH, &num_region, &num_tag);
     if(!layout_node) {
         return 2;
     }

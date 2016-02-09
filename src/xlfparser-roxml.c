@@ -163,7 +163,7 @@ void parse_tags(node_t *layout_rnode, xlfNode *layout_xnode) {
     }
 }
 
-xlfNode *parse_layout(const char *srcfile) {
+xlfNode *parse_layout(const char *srcfile, int *nr, int *nt) {
     char *xlffile;
 
     node_t *doc_rnode;
@@ -173,6 +173,7 @@ xlfNode *parse_layout(const char *srcfile) {
     xlfNode *layout_xnode = layout_new();
     Layout *layout;
 
+    *nr = *nt = 0;
 
     xlffile = _xlf_strcpy(srcfile);
     doc_rnode = roxml_load_doc(xlffile);
@@ -191,9 +192,11 @@ xlfNode *parse_layout(const char *srcfile) {
     while(child_rnode) {
         if(is_node_name(child_rnode, "region")) {
             parse_regions(child_rnode, layout_xnode);
+            *nr += 1;
         }
         if(is_node_name(child_rnode, "tags")) {
             parse_tags(child_rnode, layout_xnode);
+            *nt += 1;
         }
         child_rnode = roxml_get_next_sibling(child_rnode);
     }

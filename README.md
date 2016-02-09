@@ -10,8 +10,10 @@
 
 int main() {
     xlfNode *node;
+    int num_region, num_tag;
+
     const char *filepath = "/tmp/file.xlf";
-    node = xlfparser_parse_file(filepath);
+    node = xlfparser_parse_file(filepath, &num_region, &num_tag);
 
     if(node == NULL) {
         /* ouch cannot parse the file */

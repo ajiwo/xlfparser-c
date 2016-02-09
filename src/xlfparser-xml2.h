@@ -7,7 +7,7 @@
 #include <libxml/xmlreader.h>
 #include "xlflayout.h"
 typedef xmlNode node_t;
-xlfNode *parse_layout(const char *xlf_file);
+xlfNode *parse_layout(const char *xlf_file, *nr, *nt);
 #else
 void xlfparser_xml2_dummy();
 

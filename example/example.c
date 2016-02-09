@@ -16,6 +16,8 @@ int main(int argc, char **argv) {
     int i;
     int length;
 
+    int num_regions, num_tag;
+
     if (argc != 2) {
         return(1);
     }
@@ -23,7 +25,7 @@ int main(int argc, char **argv) {
     /* use API { */
 
     /* the main function, got everything inside layout_xnode which can be iterated thru, see 'iterate way'*/
-    layout_xnode = xlfparser_parse_file(argv[1]);
+    layout_xnode = xlfparser_parse_file(argv[1], &num_regions, &num_tag);
 
     /* let's try the public API */
     layout = xlfparser_get_layout(layout_xnode);

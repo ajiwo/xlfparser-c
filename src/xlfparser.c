@@ -9,8 +9,8 @@
 #include "xlfparser-xml2.h"
 #endif
 
-xlfNode *xlfparser_parse_file(const char *filename) {
-    return parse_layout(filename);
+xlfNode *xlfparser_parse_file(const char *filename, int *nr, int *nt) {
+    return parse_layout(filename, nr, nt);
 }
 
 Layout *xlfparser_get_layout(xlfNode *xlf_node) {

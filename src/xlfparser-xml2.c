@@ -160,11 +160,12 @@ void parse_tags(node_t *layout_rnode, xlfNode *layout_xnode) {
     }
 }
 
-xlfNode *parse_layout(const char *xlf_file) {
+xlfNode *parse_layout(const char *xlf_file, int *nr, int *nt) {
     xmlDoc *doc;
     node_t *node, *child;
     xlfNode *layout_xnode;
     Layout *layout;
+
 
     /*
      * this initialize the library and check potential ABI mismatches
@@ -173,6 +174,7 @@ xlfNode *parse_layout(const char *xlf_file) {
      */
     LIBXML_TEST_VERSION
 
+    *nr = *nt = 0;
     doc = xmlReadFile(xlf_file, NULL, 0);
     if(!doc) {
         fprintf(stderr, "ERROR: document parsing failed\n");
@@ -199,8 +201,10 @@ xlfNode *parse_layout(const char *xlf_file) {
     while(child) {
         if(is_element_name(child, "region")) {
             parse_regions(child, layout_xnode);
+            *nr += 1;
         } else if(is_element_name(child, "tags")) {
             parse_tags(child, layout_xnode);
+            *nt += 1;
         }
         child = child->next;
     }

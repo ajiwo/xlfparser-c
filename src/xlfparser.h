@@ -14,7 +14,7 @@ extern "C" {
  * @param filename path to xlf file
  * @return pointer to the newly created layout node or NULL if failed
  */
-xlfNode *xlfparser_parse_file(const char *filename);
+xlfNode *xlfparser_parse_file(const char *filename, int *nr, int *nt);
 
 /**
  * @brief get the parsed Layout struct
