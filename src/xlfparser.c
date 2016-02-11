@@ -29,15 +29,23 @@ int xlfparser_region_length(Layout *layout) {
     return node_length(layout->regions);
 }
 
-Region *xlfparser_get_region(Layout *layout, int index) {
+Region *xlfparser_get_region(Layout *layout, int index, int *no, int *nm) {
     xlfNode *node;
+
+    *no = *nm = -1;
 
     if(layout == NULL) {
         return NULL;
     }
 
     node = node_get(layout->regions, index);
-    return node ? node->data : NULL;
+    if(node) {
+        *no = node_length(((Region *)node->data)->options);
+        *nm = node_length(((Region *)node->data)->media);
+        return node->data;
+    }
+
+    return NULL;
 }
 
 int xlfparser_region_option_length(Region *region) {

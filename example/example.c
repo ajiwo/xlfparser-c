@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
     int i;
     int length;
 
-    int num_regions, num_tag;
+    int num_regions, num_tag, num_media, num_roption;
 
     if (argc != 2) {
         return(1);
@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
            layout->background);
     length = xlfparser_node_length(layout->regions);
     for(i = 0; i < length; i++) {
-        region = xlfparser_get_region(layout, i);
+        region = xlfparser_get_region(layout, i, &num_roption, &num_media);
         printf("region id: '%s', width: %d, height: %d, left: %d, top: %d\n",
                region->id,
                region->width,

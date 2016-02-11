@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     int region_index;
     int failed = 0;
 
-    int num_region, num_tag;
+    int num_region, num_tag, num_roption, num_media;
 
     if(argc < 2) {
         return 1;
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     arg1 = argv[1];
     region_index = atoi(argv[2]);
 
-    region = xlfparser_get_region(layout, region_index);
+    region = xlfparser_get_region(layout, region_index, &num_roption, &num_media);
     if(!region) {
         return 3;
     }
@@ -48,7 +48,7 @@ int main(int argc, char **argv) {
     } else if(!strcmp(arg1, "top")) {
         printf("%d\n", region->top);
     } else if(!strcmp(arg1, "num_media")) {
-        printf("%d\n", xlfparser_media_length(region));
+        printf("%d\n", num_media);
     } else {
         failed = 1;
     }

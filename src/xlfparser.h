@@ -47,11 +47,13 @@ int xlfparser_region_length(Layout *layout);
 
 /**
  * @brief get a region at position index
- * @param the layout retrieved previously with xlfparser_get_layout().
+ * @param layout retrieved previously with xlfparser_get_layout().
  * @param index
+ * @param no the number of region option.
+ * @param nm the number of media inside the region.
  * @return the Region object, or NULL if failed.
  */
-Region *xlfparser_get_region(Layout *layout, int index);
+Region *xlfparser_get_region(Layout *layout, int index, int *no, int *nm);
 
 /**
  * @brief get the number of options under the xlf_node
