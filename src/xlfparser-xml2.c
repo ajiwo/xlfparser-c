@@ -165,7 +165,9 @@ xlfNode *parse_layout(const char *xlf_file, int *nr, int *nt) {
     node_t *node, *child;
     xlfNode *layout_xnode;
     Layout *layout;
-
+    FILE *file;
+    size_t len;
+    xmlChar *data;
 
     /*
      * this initialize the library and check potential ABI mismatches
@@ -175,7 +177,26 @@ xlfNode *parse_layout(const char *xlf_file, int *nr, int *nt) {
     LIBXML_TEST_VERSION
 
     *nr = *nt = 0;
-    doc = xmlReadFile(xlf_file, NULL, 0);
+
+    file = fopen(xlf_file, "r");
+    if(file == NULL) {
+        fprintf(stderr, "ERROR: file open failed.\n");
+        return NULL;
+    }
+
+    fseek(file, 0, SEEK_END);
+    len = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    data = malloc(len + 1);
+    data[len] = '\0';
+
+    if(fread(data, 1, len, file) == len) {
+        doc = xmlReadDoc(data, xlf_file, NULL, 0);
+        fclose(file);
+    }
+    free(data);
+
     if(!doc) {
         fprintf(stderr, "ERROR: document parsing failed\n");
         return NULL;
@@ -211,6 +232,7 @@ xlfNode *parse_layout(const char *xlf_file, int *nr, int *nt) {
 
     xmlFreeDoc(doc);
     xmlCleanupParser();
+
     return layout_xnode;
 }
 
