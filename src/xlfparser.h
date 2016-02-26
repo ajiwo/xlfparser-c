@@ -64,11 +64,12 @@ int xlfparser_region_option_length(Region *region);
 
 /**
  * @brief get a region option at position index
- * @param the region retrieved previously with xlfparser_get_region().
- * @param index
+ * @param region the region retrieved previously with xlfparser_get_region().
+ * @param index the index of option to fetch, ignored if key is not NULL,
+ * @param key the key to search
  * @return the RegionOption object, or NULL if failed.
  */
-RegionOption *xlfparser_get_region_option(Region *region, int index);
+RegionOption *xlfparser_get_region_option(Region *region, int index, const char *key);
 
 /**
  * @brief get the number of media under the given xlf_node
@@ -96,10 +97,11 @@ int xlfparser_media_option_length(Media *media);
 /**
  * @brief get a media option at position index
  * @param the media retrieved previously with xlfparser_get_media().
- * @param index
+ * @param index the index of option to fetch, ignored if key is not NULL,
+ * @param key the key to search
  * @return the MediaOption object, or NULL if failed.
  */
-MediaOption *xlfparser_get_media_option(Media *media, int index);
+MediaOption *xlfparser_get_media_option(Media *media, int index, const char *key);
 
 /**
  * @brief get the number of media raw under the xlf_node

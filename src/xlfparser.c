@@ -55,13 +55,29 @@ int xlfparser_region_option_length(Region *region) {
     return node_length(region->options);
 }
 
-RegionOption *xlfparser_get_region_option(Region *region, int index) {
+RegionOption *xlfparser_get_region_option(Region *region, int index, const char *key) {
     xlfNode *node;
+    RegionOption *opt;
+    int i, len;
+
     if(region == NULL) {
         return NULL;
     }
-    node = node_get(region->options, index);
-    return node ? node->data : NULL;
+    if(key == NULL) {
+        node = node_get(region->options, index);
+        return node ? node->data : NULL;
+    }
+
+    len = xlfparser_region_option_length(region);
+    for(i = 0; i < len; i++) {
+        opt = xlfparser_get_region_option(region, i, NULL);
+        if(!strcmp(opt->key, key)) {
+            return opt;
+        }
+    }
+
+    return NULL;
+
 }
 
 int xlfparser_tag_length(Layout *layout) {
@@ -105,13 +121,27 @@ int xlfparser_media_option_length(Media *media) {
     return node_length(media->options);
 }
 
-MediaOption *xlfparser_get_media_option(Media *media, int index) {
+MediaOption *xlfparser_get_media_option(Media *media, int index, const char *key) {
     xlfNode *node;
+    MediaOption *opt;
+    int i, len;
     if(media == NULL) {
         return NULL;
     }
-    node = node_get(media->options, index);
-    return node ? node->data : NULL;
+    if(key == NULL) {
+        node = node_get(media->options, index);
+        return node ? node->data : NULL;
+    }
+
+    len = xlfparser_media_option_length(media);
+    for(i = 0; i < len; i++) {
+        opt = xlfparser_get_media_option(media, i, NULL);
+        if(!strcmp(opt->key, key)) {
+            return opt;
+        }
+    }
+
+    return NULL;
 }
 
 int xlfparser_media_raw_length(Media *media) {
