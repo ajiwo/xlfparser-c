@@ -184,9 +184,10 @@ char *_xlf_strcpy(const char *src) {
     int len;
     char *dst;
 
-    len = 0;
     if(src != NULL)
         len = strlen(src);
+    else
+        return NULL;
 
     dst = malloc(len + 1);
     dst[len] = '\0';
