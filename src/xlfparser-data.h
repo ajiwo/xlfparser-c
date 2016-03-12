@@ -65,6 +65,8 @@ typedef struct _XlfRegion {
 
     xlfNode *media;
     xlfNode *options;
+
+    xlfNode *_node;
 } Region;
 
 typedef struct _XlfKeyVal MediaOption;
@@ -78,6 +80,8 @@ typedef struct _XlfMedia {
 
     xlfNode *options;
     xlfNode *raws;
+
+    xlfNode *_node;
 } Media;
 
 #endif /* XLFPARSERDATA */

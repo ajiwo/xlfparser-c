@@ -10,6 +10,7 @@ xlfNode *region_new() {
 
     node = node_new(XLF_NODE_REGION);
     node->data = (Region *) region;
+    region->_node = node;
 
     return node;
 }

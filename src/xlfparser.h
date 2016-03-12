@@ -127,6 +127,12 @@ int xlfparser_delete_layout(Layout *layout);
 
 
 int xlfparser_node_length(xlfNode *xlf_node);
+
+Media *xlfparser_media_dup(Media *src);
+int xlfparser_delete_media(Media *media);
+Region *xlfparser_region_dup(Region *src);
+int xlfparser_delete_region(Region *region);
+Layout *xlfparser_layout_dup(Layout *src);
 #ifdef	__cplusplus
 }
 #endif

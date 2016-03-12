@@ -3,6 +3,7 @@
 xlfNode *media_new() {
     xlfNode *node = node_new(XLF_NODE_MEDIA);
     Media *media = malloc(sizeof(Media));
+    media->_node = node;
     media->options = NULL;
     media->raws = NULL;
     node->data = (Media *) media;
