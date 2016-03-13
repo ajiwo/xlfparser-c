@@ -244,7 +244,7 @@ int xlfparser_delete_region(Region *region) {
         return -1;
     }
     node = region->_node;
-    return media_delete_all(&node);
+    return region_delete_all(&node);
 }
 
 Media *xlfparser_media_dup(Media *src) {
